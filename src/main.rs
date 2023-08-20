@@ -1,8 +1,6 @@
 mod schema;
 
 use diesel::prelude::*;
-use dotenvy::dotenv;
-use std::env;
 
 use crate::schema::users;
 
@@ -20,9 +18,7 @@ pub struct WithoutName {
 }
 
 fn main() {
-    dotenv().ok();
-
-    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+    let database_url = "mysql://root:password@127.0.0.1:3500/db";
     let mut conn = MysqlConnection::establish(&database_url)
         .unwrap_or_else(|_| panic!("Error connecting to {}", database_url));
 
